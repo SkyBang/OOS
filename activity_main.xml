@@ -9,16 +9,75 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/stop_location"
+        android:layout_width="match_parent"
+        android:layout_height="262dp"
+
+        android:textSize="100sp"
+        android:textColor="#FF0000"
+         />
+
+    <TextView
+        android:id="@+id/show_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Location"
-        android:textSize="20sp"
-        android:id="@+id/show_location"
-        />
-        <Button
+        android:textSize="20sp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <Button
+        android:id="@+id/getLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Get Location" />
+
+    <Button
+        android:id="@+id/getOut"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Get Out" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Get Location"
-            android:id="@+id/getLocation"/>
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
