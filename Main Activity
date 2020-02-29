@@ -23,10 +23,13 @@ import org.w3c.dom.Text;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_LOCATION = 1;
     Button getLocationBtn;
+    Button getOutBtn;
     TextView showLocationText;
+    TextView stopLocationText;
 
     LocationManager locationManager;
     String latitude, longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +37,33 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         showLocationText = findViewById(R.id.show_location);
+        stopLocationText = findViewById(R.id.stop_location);
         getLocationBtn = findViewById(R.id.getLocation);
+
         getLocationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
                 if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    OnGPS();
+                    OnGPS ();
                 } else {
 
                     getLocationBtn();
+                }
+            }
+
+            private void OnGPS() {
+            }
+        });
+
+        getOutBtn = findViewById(R.id.getOut);
+        getOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (getOutBtn.isPressed()){
+                    finish();
+                    System.exit(0);
                 }
             }
         });
@@ -62,30 +82,41 @@ public class MainActivity extends AppCompatActivity {
 
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
+                if (lat != 44.86494166666667 && longi != 24.926065) {
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                } else if (lat == 44.86494166666667 && longi == 24.926065){
+                    stopLocationText.setText("STOP");
+                    if (LocationGps != null) {
+                         lat = LocationGps.getLatitude();
+                         longi = LocationGps.getLongitude();
 
-                showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-            } else if (LocationNetwork != null) {
-                double lat = LocationNetwork.getLatitude();
-                double longi = LocationNetwork.getLongitude();
+                        latitude = String.valueOf(lat);
+                        longitude = String.valueOf(longi);
+                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);}
+                    else if (LocationNetwork != null) {
+                        lat = LocationNetwork.getLatitude();
+                        longi = LocationNetwork.getLongitude();
 
-                latitude = String.valueOf(lat);
-                longitude = String.valueOf(longi);
+                        latitude = String.valueOf(lat);
+                        longitude = String.valueOf(longi);
 
-                showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-            } else if (LocationPassive != null) {
-                double lat = LocationPassive.getLatitude();
-                double longi = LocationPassive.getLongitude();
+                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                    } else if (LocationPassive != null) {
+                        lat = LocationPassive.getLatitude();
+                        longi = LocationPassive.getLongitude();
 
-                latitude = String.valueOf(lat);
-                longitude = String.valueOf(longi);
+                        latitude = String.valueOf(lat);
+                        longitude = String.valueOf(longi);
 
-                showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-            } else {
-                Toast.makeText(this, "Can't get your location", Toast.LENGTH_SHORT).show();
+                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                    } else {
+                        Toast.makeText(this, "Can't get your location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         }
     }
-
 
     public void OnGPS(){
         final AlertDialog.Builder builder= new AlertDialog.Builder(this);
