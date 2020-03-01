@@ -52,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            private void OnGPS() {
-            }
         });
 
         getOutBtn = findViewById(R.id.getOut);
@@ -79,45 +77,45 @@ public class MainActivity extends AppCompatActivity {
             if (LocationGps != null) {
                 double lat = LocationGps.getLatitude();
                 double longi = LocationGps.getLongitude();
-
                 latitude = String.valueOf(lat);
                 longitude = String.valueOf(longi);
                 if (lat != 44.86494166666667 && longi != 24.926065) {
                     showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-                } else if (lat == 44.86494166666667 && longi == 24.926065){
+                } else if (lat == 44.86494166666667 && longi == 24.926065) {
                     stopLocationText.setText("STOP");
-                    if (LocationGps != null) {
-                         lat = LocationGps.getLatitude();
-                         longi = LocationGps.getLongitude();
-
-                        latitude = String.valueOf(lat);
-                        longitude = String.valueOf(longi);
-                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);}
-                    else if (LocationNetwork != null) {
-                        lat = LocationNetwork.getLatitude();
-                        longi = LocationNetwork.getLongitude();
-
-                        latitude = String.valueOf(lat);
-                        longitude = String.valueOf(longi);
-
-                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-                    } else if (LocationPassive != null) {
-                        lat = LocationPassive.getLatitude();
-                        longi = LocationPassive.getLongitude();
-
-                        latitude = String.valueOf(lat);
-                        longitude = String.valueOf(longi);
-
-                        showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
-                    } else {
-                        Toast.makeText(this, "Can't get your location", Toast.LENGTH_SHORT).show();
-                    }
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
                 }
-
+            } else if (LocationNetwork != null) {
+                double lat = LocationNetwork.getLatitude();
+                double longi = LocationNetwork.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(longi);
+                if (lat != 44.826744 && longi != 24.923506) {
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                } else if (lat == 44.826744 && longi == 24.923506) {
+                    stopLocationText.setText("STOP");
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                }
+            }
+            else if (LocationPassive != null) {
+                double lat = LocationPassive.getLatitude();
+                double longi = LocationPassive.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(longi);
+                if (lat != 44.86494166666667 && longi != 24.926065) {
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                } else if (lat == 44.86494166666667 && longi == 24.926065) {
+                    stopLocationText.setText("STOP");
+                    showLocationText.setText("Your location:" + "\n" + "Latitude=" + latitude + "\n" + "longitude:" + longitude);
+                }
+            }
+            else {
+                stopLocationText.setText("PLZZ WORK" );
+                showLocationText.setText("also PLZZ WORK");
+                Toast.makeText(this, "Can't get your location", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
     public void OnGPS(){
         final AlertDialog.Builder builder= new AlertDialog.Builder(this);
         builder.setMessage("Enable GPS").setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -128,11 +126,12 @@ public class MainActivity extends AppCompatActivity {
         }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-            dialogInterface.cancel();
+                dialogInterface.cancel();
             }
         });
         final AlertDialog alertDialog=builder.create();
         alertDialog.show();
     }
 }
+
 
